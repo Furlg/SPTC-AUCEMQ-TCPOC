@@ -76,9 +76,7 @@
   <!--根据host|user查询返回多条记录-->
   <select id="selectByHostAndUser" parameterType="com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityKey" resultType="java.util.TreeMap">
     select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
+    <include refid="Base_Column_List" />,<include refid="Blob_Column_List" />
     from user
     where `Host` = ${host}
     and `User` = ${user}

@@ -18,7 +18,7 @@ public class ScheduledTasks {
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-	@Scheduled(cron = "0 3 23 * * * ")
+	@Scheduled(cron = "0 */3 * * * *")
 	public void reportCurrentTime() {
 		log.info("当前使用scheduled打印的scheduled时间是:", dateFormat.format(new Date()));
 	}

@@ -55,6 +55,6 @@ public class AuthManagerImp  implements AuthManager{
                 throw new GlobalException(ErrorCodeAndMessage.QUERY_NULL);
             }
             hashtable.put("SysAuthEntityWithBLOBs",arrayList);
-        return hashtable;
+            return hashtable;
     }
 }

@@ -20,14 +20,14 @@ public interface SysAuthMapper {
     /**
      * 根据主机地址和用户名称查询返回单条对象
      * @param key
-     * @return
+     * @return SysAuthEntityWithBLOBs
      */
     SysAuthEntityWithBLOBs selectByPrimaryKey(SysAuthEntityKey key);
 
     /**
-     * 根据主机地址和用户名称查询返回HashMap<String,ArrayList> </>
+     * 根据主机地址和用户名称查询返回ArrayList<String,ArrayList> </>
      * @param key
-     * @return
+     * @return ArrayList
      */
     ArrayList<TreeMap<String,Object>> selectByHostAndUser(SysAuthEntityKey key);
 
