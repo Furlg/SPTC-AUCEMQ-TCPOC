@@ -1,4 +1,4 @@
-package com.hook.MysqlSys.AuthManager.Entity;
+package com.hook.Sys.AuthManager.Entity;
 
 import java.io.Serializable;
 import lombok.Data;

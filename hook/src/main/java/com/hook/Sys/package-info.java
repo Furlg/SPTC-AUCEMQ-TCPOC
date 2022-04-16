@@ -3,4 +3,4 @@
  * To change this template file, choose Tools | Templates
  * 关于MySQLSys一些j接口项目
  */
-package com.hook.MysqlSys;
+package com.hook.Sys;

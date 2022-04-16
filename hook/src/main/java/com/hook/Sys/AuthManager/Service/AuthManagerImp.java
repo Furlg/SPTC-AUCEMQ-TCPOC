@@ -1,8 +1,8 @@
-package com.hook.MysqlSys.AuthManager.Service;
+package com.hook.Sys.AuthManager.Service;
 
 import com.hook.Mappers.SysAuthMapper;
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityKey;
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityWithBLOBs;
+import com.hook.Sys.AuthManager.Entity.SysAuthEntityKey;
+import com.hook.Sys.AuthManager.Entity.SysAuthEntityWithBLOBs;
 import com.hook.message.ErrorCodeAndMessage;
 import com.hook.message.GlobalException;
 import lombok.extern.slf4j.Slf4j;

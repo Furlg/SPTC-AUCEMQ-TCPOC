@@ -20,7 +20,7 @@ public class ScheduledTasks {
 
 	@Scheduled(cron = "0 */3 * * * *")
 	public void reportCurrentTime() {
-		log.info("当前使用scheduled打印的scheduled时间是:", dateFormat.format(new Date()));
+		log.info("当前使用scheduled打印的scheduled时间是:"+dateFormat.format(new Date()));
 	}
     
 }

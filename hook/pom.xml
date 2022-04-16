@@ -33,9 +33,10 @@
             <version>2.2.1</version>
         </dependency>
 
+        <!--添加对Oracle的支持-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>

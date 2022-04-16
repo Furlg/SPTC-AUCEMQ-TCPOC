@@ -1,12 +1,9 @@
-package com.hook.MysqlSys.AuthManager.Service;
+package com.hook.Sys.AuthManager.Service;
 
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityKey;
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityWithBLOBs;
+import com.hook.Sys.AuthManager.Entity.SysAuthEntityWithBLOBs;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.TreeMap;
 
 public interface AuthManager {
 

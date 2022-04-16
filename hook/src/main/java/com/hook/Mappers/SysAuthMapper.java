@@ -1,12 +1,11 @@
 package com.hook.Mappers;
 
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntity;
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityKey;
-import com.hook.MysqlSys.AuthManager.Entity.SysAuthEntityWithBLOBs;
+import com.hook.Sys.AuthManager.Entity.SysAuthEntity;
+import com.hook.Sys.AuthManager.Entity.SysAuthEntityKey;
+import com.hook.Sys.AuthManager.Entity.SysAuthEntityWithBLOBs;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 @Mapper

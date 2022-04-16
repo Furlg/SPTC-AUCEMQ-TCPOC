@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hook.Mappers.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.hook.Sys.sysUser.Entity.SysUser">
+    <id column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="LOGINNAME" jdbcType="VARCHAR" property="loginname" />
+    <result column="PASSWD" jdbcType="CHAR" property="passwd" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="ORGNO" jdbcType="VARCHAR" property="orgno" />
+    <result column="USERSTATUS" jdbcType="CHAR" property="userstatus" />
+    <result column="IDTYPE" jdbcType="VARCHAR" property="idtype" />
+    <result column="IDNO" jdbcType="VARCHAR" property="idno" />
+    <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="MOBILENO" jdbcType="VARCHAR" property="mobileno" />
+    <result column="OFFICENO" jdbcType="VARCHAR" property="officeno" />
+    <result column="HOMENO" jdbcType="VARCHAR" property="homeno" />
+    <result column="FAXNO" jdbcType="VARCHAR" property="faxno" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="POSTCODE" jdbcType="CHAR" property="postcode" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="CREATEDATE" jdbcType="CHAR" property="createdate" />
+    <result column="MODIFYDATE" jdbcType="CHAR" property="modifydate" />
+    <result column="PWDERRTIMES" jdbcType="DECIMAL" property="pwderrtimes" />
+    <result column="PWDERRLOCKDT" jdbcType="CHAR" property="pwderrlockdt" />
+    <result column="PWDSETDATE" jdbcType="CHAR" property="pwdsetdate" />
+    <result column="LASTLOGINTIME" jdbcType="CHAR" property="lastlogintime" />
+    <result column="LASTLOGINSTATION" jdbcType="VARCHAR" property="lastloginstation" />
+    <result column="USERTYPE" jdbcType="CHAR" property="usertype" />
+    <result column="CERTIFICATE" jdbcType="VARCHAR" property="certificate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USERID, LOGINNAME, PASSWD, USERNAME, ORGNO, USERSTATUS, IDTYPE, IDNO, SEX, MOBILENO, 
+    OFFICENO, HOMENO, FAXNO, EMAIL, POSTCODE, ADDRESS, CREATEDATE, MODIFYDATE, PWDERRTIMES, 
+    PWDERRLOCKDT, PWDSETDATE, LASTLOGINTIME, LASTLOGINSTATION, USERTYPE, CERTIFICATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_USER
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="USERID" keyProperty="userid" parameterType="com.hook.Sys.sysUser.Entity.SysUser" useGeneratedKeys="true">
+    insert into SYS_USER (LOGINNAME, PASSWD, USERNAME, 
+      ORGNO, USERSTATUS, IDTYPE, 
+      IDNO, SEX, MOBILENO, OFFICENO, 
+      HOMENO, FAXNO, EMAIL, 
+      POSTCODE, ADDRESS, CREATEDATE, 
+      MODIFYDATE, PWDERRTIMES, PWDERRLOCKDT, 
+      PWDSETDATE, LASTLOGINTIME, LASTLOGINSTATION, 
+      USERTYPE, CERTIFICATE)
+    values (#{loginname,jdbcType=VARCHAR}, #{passwd,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+      #{orgno,jdbcType=VARCHAR}, #{userstatus,jdbcType=CHAR}, #{idtype,jdbcType=VARCHAR}, 
+      #{idno,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{mobileno,jdbcType=VARCHAR}, #{officeno,jdbcType=VARCHAR}, 
+      #{homeno,jdbcType=VARCHAR}, #{faxno,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{createdate,jdbcType=CHAR}, 
+      #{modifydate,jdbcType=CHAR}, #{pwderrtimes,jdbcType=DECIMAL}, #{pwderrlockdt,jdbcType=CHAR}, 
+      #{pwdsetdate,jdbcType=CHAR}, #{lastlogintime,jdbcType=CHAR}, #{lastloginstation,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=CHAR}, #{certificate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="USERID" keyProperty="userid" parameterType="com.hook.Sys.sysUser.Entity.SysUser" useGeneratedKeys="true">
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginname != null">
+        LOGINNAME,
+      </if>
+      <if test="passwd != null">
+        PASSWD,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="orgno != null">
+        ORGNO,
+      </if>
+      <if test="userstatus != null">
+        USERSTATUS,
+      </if>
+      <if test="idtype != null">
+        IDTYPE,
+      </if>
+      <if test="idno != null">
+        IDNO,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="mobileno != null">
+        MOBILENO,
+      </if>
+      <if test="officeno != null">
+        OFFICENO,
+      </if>
+      <if test="homeno != null">
+        HOMENO,
+      </if>
+      <if test="faxno != null">
+        FAXNO,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="postcode != null">
+        POSTCODE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="modifydate != null">
+        MODIFYDATE,
+      </if>
+      <if test="pwderrtimes != null">
+        PWDERRTIMES,
+      </if>
+      <if test="pwderrlockdt != null">
+        PWDERRLOCKDT,
+      </if>
+      <if test="pwdsetdate != null">
+        PWDSETDATE,
+      </if>
+      <if test="lastlogintime != null">
+        LASTLOGINTIME,
+      </if>
+      <if test="lastloginstation != null">
+        LASTLOGINSTATION,
+      </if>
+      <if test="usertype != null">
+        USERTYPE,
+      </if>
+      <if test="certificate != null">
+        CERTIFICATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        #{passwd,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orgno != null">
+        #{orgno,jdbcType=VARCHAR},
+      </if>
+      <if test="userstatus != null">
+        #{userstatus,jdbcType=CHAR},
+      </if>
+      <if test="idtype != null">
+        #{idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="mobileno != null">
+        #{mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="officeno != null">
+        #{officeno,jdbcType=VARCHAR},
+      </if>
+      <if test="homeno != null">
+        #{homeno,jdbcType=VARCHAR},
+      </if>
+      <if test="faxno != null">
+        #{faxno,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="modifydate != null">
+        #{modifydate,jdbcType=CHAR},
+      </if>
+      <if test="pwderrtimes != null">
+        #{pwderrtimes,jdbcType=DECIMAL},
+      </if>
+      <if test="pwderrlockdt != null">
+        #{pwderrlockdt,jdbcType=CHAR},
+      </if>
+      <if test="pwdsetdate != null">
+        #{pwdsetdate,jdbcType=CHAR},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=CHAR},
+      </if>
+      <if test="lastloginstation != null">
+        #{lastloginstation,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null">
+        #{usertype,jdbcType=CHAR},
+      </if>
+      <if test="certificate != null">
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hook.Sys.sysUser.Entity.SysUser">
+    update SYS_USER
+    <set>
+      <if test="loginname != null">
+        LOGINNAME = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        PASSWD = #{passwd,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orgno != null">
+        ORGNO = #{orgno,jdbcType=VARCHAR},
+      </if>
+      <if test="userstatus != null">
+        USERSTATUS = #{userstatus,jdbcType=CHAR},
+      </if>
+      <if test="idtype != null">
+        IDTYPE = #{idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        IDNO = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="mobileno != null">
+        MOBILENO = #{mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="officeno != null">
+        OFFICENO = #{officeno,jdbcType=VARCHAR},
+      </if>
+      <if test="homeno != null">
+        HOMENO = #{homeno,jdbcType=VARCHAR},
+      </if>
+      <if test="faxno != null">
+        FAXNO = #{faxno,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        POSTCODE = #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        CREATEDATE = #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="modifydate != null">
+        MODIFYDATE = #{modifydate,jdbcType=CHAR},
+      </if>
+      <if test="pwderrtimes != null">
+        PWDERRTIMES = #{pwderrtimes,jdbcType=DECIMAL},
+      </if>
+      <if test="pwderrlockdt != null">
+        PWDERRLOCKDT = #{pwderrlockdt,jdbcType=CHAR},
+      </if>
+      <if test="pwdsetdate != null">
+        PWDSETDATE = #{pwdsetdate,jdbcType=CHAR},
+      </if>
+      <if test="lastlogintime != null">
+        LASTLOGINTIME = #{lastlogintime,jdbcType=CHAR},
+      </if>
+      <if test="lastloginstation != null">
+        LASTLOGINSTATION = #{lastloginstation,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null">
+        USERTYPE = #{usertype,jdbcType=CHAR},
+      </if>
+      <if test="certificate != null">
+        CERTIFICATE = #{certificate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hook.Sys.sysUser.Entity.SysUser">
+    update SYS_USER
+    set LOGINNAME = #{loginname,jdbcType=VARCHAR},
+      PASSWD = #{passwd,jdbcType=CHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      ORGNO = #{orgno,jdbcType=VARCHAR},
+      USERSTATUS = #{userstatus,jdbcType=CHAR},
+      IDTYPE = #{idtype,jdbcType=VARCHAR},
+      IDNO = #{idno,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      MOBILENO = #{mobileno,jdbcType=VARCHAR},
+      OFFICENO = #{officeno,jdbcType=VARCHAR},
+      HOMENO = #{homeno,jdbcType=VARCHAR},
+      FAXNO = #{faxno,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      POSTCODE = #{postcode,jdbcType=CHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=CHAR},
+      MODIFYDATE = #{modifydate,jdbcType=CHAR},
+      PWDERRTIMES = #{pwderrtimes,jdbcType=DECIMAL},
+      PWDERRLOCKDT = #{pwderrlockdt,jdbcType=CHAR},
+      PWDSETDATE = #{pwdsetdate,jdbcType=CHAR},
+      LASTLOGINTIME = #{lastlogintime,jdbcType=CHAR},
+      LASTLOGINSTATION = #{lastloginstation,jdbcType=VARCHAR},
+      USERTYPE = #{usertype,jdbcType=CHAR},
+      CERTIFICATE = #{certificate,jdbcType=VARCHAR}
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

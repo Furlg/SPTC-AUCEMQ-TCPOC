@@ -1,10 +1,9 @@
-package com.hook.MysqlSys.AuthManager.Controller;
+package com.hook.Sys.AuthManager.Controller;
 
-import com.hook.MysqlSys.AuthManager.Service.AuthManagerImp;
+import com.hook.Sys.AuthManager.Service.AuthManagerImp;
 import com.hook.message.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.HashMap;
 
@@ -24,6 +23,7 @@ public class AuthManagerController {
     @RequestMapping(value = "Q01" ,method = RequestMethod.POST)
     @ResponseBody
     public Response selectUserInfoByHostUser(@RequestBody HashMap<String,String> hashMap){
+        System.out.println("当调用此controller时打印信息");
          response = new Response(authManagerImp.selectByPrimaryKey(hashMap));
          log.error(response.getBody().toString());
         return response;
