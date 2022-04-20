@@ -1,0 +1,125 @@
+--CONNECT PRIOR  START WITH查询表中存在层次关系的数据即将每一个满足条件的数据都进行递归
+	
+	场景:当表中数据具有层次关系时,可以理解为树状结构例如机构表中每一个机构都具有上级机构(总行除外),机构的上级机构可能还具有上级机构。此时想要查询某个机构的上级机构上上级...等
+		此时即可以使用此语法进行递归查询
+		
+		SELECT t.ORGID,t.ORGNO,t.ORGNAME FROM SYS_ORG t  CONNECT BY (PRIOR t.PARENTORGNO) = t.orgno START WITH t.orgno = '23172' ORDER BY t.ORGID; 
+		
+	语法:
+		[ START WITH CONDITION1 ] CONNECT BY [ NOCYCLE ] CONDITION2 
+		
+		[ START WITH CONDITION1 ] 		CONDITION1 用来标识哪一行数据作为树状结构的根节点例如:t.orgno = '23172' 以orgno = '23172'这行数据为根节点然后根据PRIOR 末端列指示向上
+										递归还是向下递归
+										
+										CONNECT BY PRIOR childNode = parentNode START WITH childNode = param 
+										以childNode = param 这条数据作为根节点.因为 PRIOR childNode = parentNode 因此取根节点的childNode的值.此时就递归扫描所有parentNode等于根节点内childNode值的数据
+										
+										CONNECT BY PRIOR childNode = parentNode START WITH parentNode = param
+										以parentNode = param 这条数据作为根节点.因为 PRIOR childNode = parentNode 因此取根节点的childNode的值.此时就递归扫描所有parentNode等于根节点内childNode值的数据
+										
+										CONNECT BY PRIOR parentNode = childNode START WITH childNode = param
+										以childNode = param 这条数据作为根节点.因为 PRIOR parentNode = childNode 因此取根节点的parentNode的值.此时就递归扫描所有childNode等于根节点内parentNode值的数据
+										
+										CONNECT BY PRIOR parentNode = childNode START WITH parentNod = param
+										以parentNode = param 这条数据作为根节点.因为PRIOR parentNode = childNode 因此取根节点内的parentNode的值.此时就递归扫描所有childNode等于根节点内parentNode值的数据
+										
+										
+		CONNECT BY PRIOR  CONDITION2	CONDITION2	指明层次关系例如:	(PRIOR t.orgno) = t.PARENTORGNO 
+										其中PRIOR运算符指明递归的顺序:
+											(PRIOR 子节点) = 父节点 表明以START WITH 内CONDITION为根节点向子节点扫扫描即向下扫描
+													
+													
+											SELECT * FROM SYS_ORG t  CONNECT BY (PRIOR  t.orgno) = t.PARENTORGNO  START WITH t.PARENTORGNO = '14001' ORDER BY t.ORGID
+											ORGID               ORGNO        ORGNAME
+											00100_14001_		14001		 张家川县联社
+											00100_14001_14003_	14003		 张家川联社营业部
+											00100_14001_14005_	14005		 张家川县信用卡中心
+											
+											SELECT t.ORGID,t.ORGNO,t.ORGNAME FROM SYS_ORG t  CONNECT BY (PRIOR  t.orgno) = t.PARENTORGNO  START WITH t.orgno = '14001' ORDER BY t.ORGID; 
+											ORGID               ORGNO        ORGNAME
+											00100_14001_		14001		 张家川县联社
+											00100_14001_14003_	14003		 张家川联社营业部
+											00100_14001_14005_	14005		 张家川县信用卡中心
+											00100_14001_14021_	14021		 张家川马鹿信用社  
+											
+											[
+												SELECT * FROM SYS_ORG t  CONNECT BY PRIOR  t.orgno = t.PARENTORGNO  START WITH t.PARENTORGNO = '14001' ORDER BY t.ORGID
+											]
+											
+											(PRIOR 父节点) = 子节点 表明以START WITH 内CONDITION 为根节点向父节点扫面即向上扫描
+												  
+
+
+--LEFT JOIN 表关联
+--RIGHT JOIN 表关联
+--INNER JOIN 表关联
+--CROSS JOIN 表关联
+
+--流程控制CASE	
+	
+	语法:
+		CASE case_value
+			WHEN when_value THEN
+				statement_list
+			ELSE
+				statement_list
+		END CASE;  --此时的CASE为别名
+		
+	例句:当机构表内某个机构父节点为ROOT时将此ROOT更改为root返回
+	SELECT 	t.ORGID,
+			t.ORGNO,
+			t.ORGNAME,
+			CASE t.PARENTORGNO 
+				WHEN 'ROOT' THEN 
+					 'root' 
+				ELSE 
+					t.PARENTORGNO 
+			END  PARENTORGNO,
+			t.CITY_STATE
+	FROM SYS_ORG t  WHERE t.PARENTORGNO ='ROOT';
+	
+	
+--DECODE实现case .. then 
+
+	语法: DECODE(Value,Conditiion1,Then,[...],Default)
+	
+	例句:
+		SELECT 
+			t.ORGID,
+			t.ORGNO,
+			DECODE(t.PARENTORGNO,'00100','ROOT',t.PARENTORGNO) PARENTORGNO,
+			t.ORGNAME
+		FROM SYS_ORG t 
+		WHERE t.PARENTORGNO = '00100';
+		
+--Union 与 Union All
+
+	说明:Union/Union All 主要用来将至少两条SELECT 语句结果联合起来相对于LEFT JOIN 等横向联合Union/Union All使用的是纵向联合即将至少两条SELECT 语句结果联合成一个结果
+	
+	语法:
+		SELECT ColumnList1 FROM table1
+		Union / Union All
+		SELECT ColumnList2 FROM table2
+	其中ColumnList1 和 ColumnList2分别为table1和table2需要检索的字段,条件为ColumnList1和ColumnList2的长度必须相等也就是说Union / Union All 联合的结果必须与ColumnLIst1
+	长度保持一致,具体联合字段可以不同但是长度必须一致且最终联合返回的结果字段为ColumnList1也就是table1检索的字段。
+	Union / Union All 的区别为Union All 不去重  Union去重
+	 
+	例句:
+	SELECT a.orgid,a.orgno,a.orgname FROM SYS_ORG a  WHERE a.orgno = '00100'
+	UNION  ALL
+	SELECT b.orgid,b.orgno,b.orgid FROM SYS_ORG b  WHERE b.orgno = '00100';
+	
+	|ORGID 	|ORGNO 	|ORGNAME
+	00100_	00100	甘肃省农村信用社联合社
+	00100_	00100	00100_
+
+	Union:
+	
+	SELECT a.orgid,a.orgno,a.orgname FROM SYS_ORG a  WHERE a.orgno = '00100'
+	UNION  
+	SELECT b.orgid,b.orgno,b.orgname FROM SYS_ORG b  WHERE b.orgno = '00100';
+	
+	|ORGID 	|ORGNO 	|ORGNAME
+	00100_	00100	甘肃省农村信用社联合社
+	
+	
