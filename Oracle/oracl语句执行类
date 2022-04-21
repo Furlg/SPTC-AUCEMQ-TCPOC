@@ -81,7 +81,7 @@
 	
 --DECODE实现case .. then 
 
-	语法: DECODE(Value,Conditiion1,Then,[...],Default)
+	语法: DECODE(Value,Condition1,Then,[...],Default)
 	
 	例句:
 		SELECT 
@@ -122,4 +122,10 @@
 	|ORGID 	|ORGNO 	|ORGNAME
 	00100_	00100	甘肃省农村信用社联合社
 	
-	
+--Oracle 两张表同步 merge into
+
+	说明:MERGE INTO 语句主要是目标表中源表数据不存在时进行插入存在时进行更新
+
+	MERGE INTO 目标表 a USING 源表 b ON (a.Condition1 = b.Condition1 AND a.Condition2 = b.Condition2)
+	WHEN MATCHED  		THEN UPDATE SET a.feild1 = b.feild1,a.feild2 = b.feild2
+	WHEN NOT MATCHED 	THEN INSERT (a.feild1,a.feild2) VALUES(b.feild1,b.feild2)  
